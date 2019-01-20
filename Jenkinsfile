@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
 	// credentials were added first using secret text in Jenkins
-        AWS_ACCESS_KEY_ID     = credentials('blrxgroup-dev-aws-secret-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('blrxgroup-dev-aws-secret-access-key')
+        AWS_ACCESS_KEY_ID     = credentials('blrxgroup-dev-aws_secret_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('blrxgroup-dev-aws_secret_access_key')
 
         // Using returnStatus
         EXIT_STATUS = """${sh(
