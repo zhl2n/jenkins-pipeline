@@ -10,13 +10,13 @@ pipeline {
         CC = """${sh(
                 returnStdout: true,
                 script: 'echo "clang"'
-            )}""" 
+            ).trim()}""" 
     }
     stages {
         stage('build') {
             steps {
             sh '/usr/local/bin/mvn --version'
-            echo "${env.CC}.trim()"
+            echo "${env.CC}"
             }
         }
 //input message: "Does http://localhost:8888/staging/ look good?"
