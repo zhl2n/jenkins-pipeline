@@ -20,6 +20,20 @@ pipeline {
             ).trim()}""" 
     }
     stages {
+        stage('parallel') {
+            parallel {
+                stage('Branch A') {
+                    steps {
+                        echo "On Branch A"
+                    }
+                }
+                stage('Branch B') {
+                    steps {
+                        echo "On Branch B"
+                    }
+                }
+ 	    }
+	}
         stage('build') {
             steps {
             sh '/usr/local/bin/mvn --version'
@@ -57,10 +71,11 @@ pipeline {
 
     post {
         always {
-            junit '**/target/*.xml'
+//            junit '**/target/*.xml'
+	      echo "post action"
         }
         failure {
-//            mail to: brewster.zhang@gmail.com, subject: 'The Pipeline failed :( '
+//            mail to: 'brewster.zhang@gmail.com', subject: 'The Pipeline failed :( '
  	    mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "brewster.zhang@gmail.com"; 
         }
     }
