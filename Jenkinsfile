@@ -1,7 +1,16 @@
 pipeline {
     agent any
     environment {
-        CC = 'clang'
+        // Using returnStdout
+        CC = """${sh(
+                returnStdout: true,
+                script: 'echo "clang"'
+            )}""" 
+        // Using returnStatus
+        EXIT_STATUS = """${sh(
+                returnStatus: true,
+                script: 'exit 1'
+            )}"""
     }
     stages {
         stage('build') {
@@ -20,7 +29,11 @@ pipeline {
             }
         }
 
+
         stage('deploy') {
+            environment {
+                DEBUG_FLAGS = '-g'
+            }
 
             steps {
               lock("myresource") {
