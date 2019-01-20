@@ -1,22 +1,22 @@
 pipeline {
     agent any
     environment {
-        // Using returnStdout
-        CC = """${sh(
-                returnStdout: true,
-                script: 'echo "clang"'
-            )}""" 
         // Using returnStatus
         EXIT_STATUS = """${sh(
                 returnStatus: true,
                 script: 'exit 1'
             )}"""
+        // Using returnStdout
+        CC = """${sh(
+                returnStdout: true,
+                script: 'echo "clang"'
+            )}""" 
     }
     stages {
         stage('build') {
             steps {
             sh '/usr/local/bin/mvn --version'
-            echo "${env.CC}"
+            echo "${env.CC}.trim()"
             }
         }
 //input message: "Does http://localhost:8888/staging/ look good?"
