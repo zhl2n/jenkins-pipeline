@@ -25,11 +25,13 @@ pipeline {
                 stage('Branch A') {
                     steps {
                         echo "On Branch A"
+			sleep 3
                     }
                 }
                 stage('Branch B') {
                     steps {
                         echo "On Branch B"
+			sleep 10
                     }
                 }
  	    }
