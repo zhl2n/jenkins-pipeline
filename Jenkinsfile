@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
+    }
     environment {
 	// credentials were added first using secret text in Jenkins
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
@@ -21,6 +24,7 @@ pipeline {
             steps {
             sh '/usr/local/bin/mvn --version'
             echo "${env.CC}"
+	    echo "${params.Greeting} World!"
             }
         }
 //input message: "Does http://localhost:8888/staging/ look good?"
