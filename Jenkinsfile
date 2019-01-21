@@ -45,6 +45,7 @@ pipeline {
             sh '/usr/local/bin/mvn --version'
             echo "${env.CC}"
 	    echo "${params.Greeting} World!"
+	    echo "${BRANCH_NAME}"
             }
         }
 //input message: "Does http://localhost:8888/staging/ look good?"
